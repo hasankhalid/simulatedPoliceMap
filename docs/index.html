@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <title>Police Services</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <script src="//d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="./animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./visCSS/districts.css">
+    <script src="granim.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <script src="./js/tools/selectize/js/standalone/selectize.js"></script>
+    <link rel="stylesheet" type="text/css" href="./js/tools/selectize/css/selectize.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+  </head>
+
+  <body>
+    <div class="applicationWrap" onclick="void(0)">
+      <div class="inverted_page">
+        <div class="vis_wrapper">
+          <div class="contentContain">
+            <div class="bubble_wrapper vis_parent" data-aos="fade-in">
+              <div id="bubble_container_main">
+                <div id="bubble_controls">
+                  <h2 class="vis_heading" style="text-align: left">Volume of Police Services across Districts till July 2019</h2>
+                  <div id="thwoInputsContain">
+                    <div class="input-legend-container">
+                      <div class="input-legend-container__input">
+                        <p class="indicatorType">Select Service</p>
+                        <div class="input">
+                          <select id="twoIndOne">
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                          </select>
+                        </div>
+                        <div style="width: 100%; margin-bottom: 20px;">
+                          <input type="text" id="indOneMinMax" name="indicatorOne_range" value="" />
+                        </div>
+                      </div>
+                      <div class="input-legend-container__legend">
+                        <div class="r-legend">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="bubble_container">
+                  <svg>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="contentContain footerLogos">
+          <img class="footer_icon" src="./resources/footerGov.png"></img>
+          <img class="footer_icon_small" src="./resources/logo.png"></img>
+          <div class="designBy">
+            <p class="plotree">Designed by Plotree Info Design</p>
+            <img class="footer_icon_p plotree" src="./resources/logoAlone.svg"></img>
+          </div>
+        </div>
+      </footer>
+    <script src="./js/bubbleMap.js"></script>
+
+
+    <script>
+      $(window).on("load", function() {
+        AOS.init();
+      });
+
+      function resize() {
+        if (window.innerWidth > 875) {
+          $('.footer_link_image').attr('data-aos', 'fade-left');
+        }
+        else {
+          $('.footer_link_image').attr('data-aos', 'fade-in');
+        }
+      }
+      resize();
+      window.onresize = resize;
+
+      $(".facebookSoc").click(function() {
+        window.open('https://www.facebook.com/pcswpb', '_blank');
+      });
+
+      $(".twitterSoc").click(function() {
+        window.open('https://twitter.com/pcswpb', '_blank');
+      });
+
+      $(".webSoc").click(function() {
+        window.open('https://pcsw.punjab.gov.pk/', '_blank');
+      });
+
+      $(".plotree").click(function() {
+        window.open('https://plotree.studio', '_blank');
+      });
+
+      $(".sunburstButt").click(function() {
+        window.location = "./sunburst.html";
+      });
+
+      $(".vaw").click(function() {
+        window.location = "./vaw.html";
+      });
+
+      $(".districtLevel").click(function() {
+        window.location = "./districts.html";
+      });
+
+      $(".finInc").click(function() {
+        window.location = "./financialInc.html";
+      });
+
+      $(".min").click(function() {
+        window.location = "./minorities.html";
+      });
+
+      $(".youth").click(function() {
+        window.location = "./youth.html";
+      });
+
+      $(".pcsw").click(function() {
+        window.location = "./";
+      });
+
+    </script>
+
+    <script>
+      var bubbleMap;
+      var mapData;
+      var defaultMapIndicators = ['Character Certificate'];
+
+      Promise.all([d3.csv('./js/files/police_services.csv'),d3.json('./js/files/PunjabBound.geojson'),d3.json('./js/files/PunjDistNoIsl.geojson')])
+      .then((data)=>{
+        mapData = data[0];
+
+        bubbleMap = getBubbleMapCreator(data[0], data[1], data[2],'#bubble_container svg', '.r-legend', '.c-legend');
+        bubbleMap.createMap(defaultMapIndicators[0], defaultMapIndicators[0]);
+
+        $("#indOneMinMax").ionRangeSlider({
+            type: "double",
+            grid: true,
+            min: 1,
+            max: 100,
+            from: 1,
+            to: 100,
+            onChange : function(data){
+              console.log(data);
+              //var indId = data.input[0].dataset.indId;
+              var indicator = $('#twoIndOne').val();
+              bubbleMap.addNumericFilter(data.from, data.to, indicator);
+              bubbleMap.executeFilter();
+            }
+        });
+
+        var rFilter = $("#indOneMinMax").data("ionRangeSlider");
+
+        $("#indTwoMinMax").ionRangeSlider({
+            type: "double",
+            grid: true,
+            min: 1,
+            max: 100,
+            from: 1,
+            to: 100,
+            onChange : function(data){
+              console.log(data);
+              //var indId = data.input[0].dataset.indId;
+              var indicator = $('#twoIndTwo').val();
+              bubbleMap.addNumericFilter(data.from, data.to, indicator);
+              bubbleMap.executeFilter();
+            }
+        });
+
+        initSelectize(mapData.columns,
+          {District : true, Division : true},
+          ['#twoIndOne'],
+          'map-indicators',
+          function(e){
+            var rIndicator = $('#twoIndOne').val();
+            var cIndicator = $('#twoIndOne').val();
+
+            var minR = Math.floor(bubbleMap.getMinIndVal(rIndicator));
+            var maxR = Math.ceil(bubbleMap.getMaxIndVal(rIndicator));
+            rFilter.update({
+              min : minR,
+              max : maxR,
+              from : minR,
+              to : maxR
+            });
+
+            bubbleMap.removeAllFilters();
+            bubbleMap.executeFilter();
+            bubbleMap.createCircle(rIndicator, cIndicator);
+
+          },
+          defaultMapIndicators,
+          function(e){
+            var minR = Math.floor(bubbleMap.getMinIndVal(defaultMapIndicators[0]));
+            var maxR = Math.ceil(bubbleMap.getMaxIndVal(defaultMapIndicators[0]));
+            rFilter.update({
+              min : minR,
+              max : maxR,
+              from : minR,
+              to : maxR
+            });
+          }
+        );
+      });
+
+      function initSelectize(options, excludeObj, selectors, groupName, cb, defaultVals, initFunc, optionVals){
+
+        options = options.filter(function(d){
+          return !excludeObj[d];
+        });
+
+        /*options = options.map((d)=>{return {name : d, text : d, value : d, disable : false};});*/
+
+        selectors.forEach(function(d,i){
+          var el = $(d);
+
+          el.attr('data-group', groupName);
+
+          optionVals = optionVals || options;
+
+          var elOptions = options.map(
+              function(o,j){
+                if(defaultVals.includes(o) && o !== defaultVals[i]){
+                  return {name : o, text : o, value : optionVals[j], disable : true};
+                }else{
+                  return {name : o, text : o, value : optionVals[j], disable : false};
+                }
+              }
+            );
+          el.selectize({
+            sortField : 'text',
+            options : elOptions,
+            disabledField: 'disable'
+          });
+
+          el[0].selectize.setValue(defaultVals[i], true);
+
+          el.on('change', function(e){
+
+            var selected = e.target.value;
+
+            if(!selected){
+              return;
+            }
+
+            var selectGroup = Array.from(document.querySelectorAll(`[data-group=${groupName}]`));
+
+            selectGroup = selectGroup.filter((d)=>d !== this);
+
+            selectGroup.forEach((e)=>{
+              Object.keys(e.selectize.options).forEach((d)=>{
+                var disable = d === selected;
+                e.selectize.updateOption(d,{disable : disable, value : d, name : d, text : d});
+              });
+            });
+            cb(e);
+          });
+
+          initFunc();
+
+          let intervalId = setInterval(function(){
+            el[0].selectize.setValue(mapData.columns[Math.floor(Math.random() * mapData.columns.length)],false)
+          }, 3000);
+        });
+      }
+
+
+    </script>
+  </body>
+</html>

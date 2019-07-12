@@ -1,0 +1,176 @@
+#trail {
+  display:flex;
+  height: 50px;
+  width: 100%;
+}
+
+.labelContainer {
+  max-width: 200px;
+  min-width:  50px;
+  height: 30px;
+  padding: 8px;
+  margin: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.fa-angle-right {
+  color: white;
+  font-size: 18px;
+  margin-left: 4px;
+}
+
+#trailAndPercent {
+  width: 100%;
+  display: flex;
+}
+
+#endlabelDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 8px;
+  margin: 1px;
+}
+
+#endlabel {
+  margin: 0px;
+}
+
+#sequence {
+  height: 50px;
+  display: flex;
+}
+
+#percentage, #percentGlobal {
+  font-size: 20px;
+  font-weight: 450;
+  color: #212121
+}
+
+.legend_container {
+  display: flex;
+}
+
+.legend_container_two {
+  display: flex;
+}
+
+.legend_element {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.legend_circle {
+  margin-right: 6px;
+}
+
+.circle_margin {
+  margin-left: 6px;
+}
+
+#explanation {
+  position: absolute;
+  top: calc(50% - 45px);
+  left: calc(50% - 130px);
+  text-align: center;
+  color: #212121;
+  z-index: -1;
+}
+
+@media only screen and (max-width: 1250px) {
+  #trail {
+    flex-wrap: wrap;
+    height: 90px;
+  }
+  #endlabelDiv {
+    position: absolute;
+    bottom: 0px;
+    right: 25px;
+  }
+  #trailAndPercent {
+    flex-wrap: wrap;
+    position: relative;
+  }
+  #sequence {
+    height: 90px;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  #percentage, #percentGlobal {
+    font-size: 16px;
+    font-weight: 450;
+    color: #212121
+  }
+  .reduceFont {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .reduceFont {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  .reduceFont {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  #percentage, #percentGlobal {
+    font-size: 12px;
+    font-weight: 450;
+    color: #212121
+  }
+  .reduceFont {
+    font-size: 10px;
+  }
+  #sunburst_legend {
+    margin-top: 60px;
+  }
+}
+
+@media only screen and (max-width: 535px) {
+  #percentage, #percentGlobal {
+    font-size: 10px;
+    font-weight: 450;
+    color: #212121;
+    margin: 0px;
+  }
+  .reduceFont {
+    font-size: 9px;
+    margin: 0px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .legend_container {
+    flex-direction: column
+  }
+  .circle_margin_responsive {
+    margin-left: 0px;
+  }
+  #percentage, #percentGlobal {
+    font-size: 9px;
+    font-weight: 450;
+    color: #212121;
+    margin: 0px;
+  }
+  .reduceFont {
+    font-size: 7px;
+  }
+}
+
+@media only screen and (max-width: 2000px) and (max-height: 700px) and (orientation: landscape)  {
+  .circle_margin {
+    margin-left: 0px;
+  }
+}

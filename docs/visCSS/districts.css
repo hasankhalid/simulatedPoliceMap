@@ -1,0 +1,154 @@
+
+
+
+
+
+/* Districts scatter/Bubble Styling */
+
+.axis text{
+  fill: white;
+  font-size: 11px;
+}
+
+.axis line{
+  stroke: white;
+  stroke-width: .75
+}
+
+.axis path{
+  stroke: white;
+  stroke-width: .25
+}
+
+.axis text{
+  font-size: 13px
+}
+
+.legendGroup text {
+  fill: white;
+}
+
+.legendOrdinal g.legendCells text {
+  fill: white;
+  font-size: 10px;
+}
+.Division.legendTitle {
+  font-size: 12px;
+  fill: white;
+  font-weight: bold;
+}
+
+svg circle { mix-blend-mode: screen; }
+
+.g-map {
+  transform : translate(50px, 50px);
+  fill : #1565c0;
+  stroke: #ffeb3b;
+  stroke-width: 1.2px
+}
+
+.g-circles {
+  transform : translate(50px, 50px);
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
+.g-outline {
+  transform : translate(50px, 50px);
+  stroke: #ffeb3b;
+  fill: none;
+  stroke-width: 1.2px;
+}
+
+.c-tooltip {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  width: 230px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 17px;
+  z-index: 100;
+}
+
+.c-tooltip-header {
+  background: linear-gradient(145deg, rgba(142,36,170,1) 0%, rgba(186,104,200,1) 100%);
+  color: white;
+  margin: -10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+}
+
+.c-tooltip-header h1 {
+  font-size: 18px;
+    font-weight: 500;
+}
+
+.tooltipValContainer {
+  display: flex;
+}
+
+.indTitle {
+  width: 82%;
+  margin-bottom: 1px;
+  font-weight: 600;
+  color: #424242;
+}
+
+.indVal {
+  width: 18%;
+  text-align: right;
+  margin-bottom: 1px;
+  font-weight: 600;
+  color: #424242;
+}
+
+.indHead {
+  border-bottom: 1px solid;
+  padding-bottom: 4px;
+  font-weight: 600;
+}
+
+.valHead {
+  border-bottom: 1px solid;
+  padding-bottom: 4px;
+  font-weight: 600;
+}
+
+.c-tooltip-body div {
+  margin: 5px 5px;
+}
+
+.c-tooltip-body {
+  font-size: 14px;
+}
+
+
+.input-legend-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-legend-container__legend {
+  width: 110px;
+}
+
+.input-legend-container__input {
+  flex-basis: 100%;
+}
+
+.c-legend, .r-legend {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-legend svg, .r-legend svg {
+  width: 90%;
+  height: 90%;
+}

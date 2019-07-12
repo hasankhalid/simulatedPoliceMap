@@ -1,0 +1,51 @@
+.node {
+  cursor: pointer;
+  pointer-events: bounding-box;
+}
+
+.node circle {
+  stroke: none;
+  mix-blend-mode: multiply;
+}
+
+.node text {
+  /*font-size: 18px;*/
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.link {
+  fill: none;
+  /*stroke: #1f78b4;*/
+  /*stroke-width: 20px;*/
+  stroke-linecap: round;
+  stroke-opacity: 0.2;
+  mix-blend-mode: multiply;
+}
+
+#categLegend .categs {
+  display: flex;
+  flex-direction: row;
+  margin: 4px 0px;
+  flex-wrap: wrap;
+}
+
+#categLegend .categ {
+  display: flex;
+  margin: 5px 0px;
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 1000px) {
+  #categLegend .categ {
+    margin: -10px 0px;
+    font-size: 14px;
+  }
+}
+
+#categLegend .categ p{
+  padding-right: 5px;
+}
+
+#categLegend .title{
+  font-weight: bold;
+}
